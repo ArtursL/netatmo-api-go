@@ -183,3 +183,23 @@ type DashboardData struct {
 	GustStrength     *int32   `json:"GustStrength,omitempty"`
 	LastMeasure      *int64   `json:"time_utc"`
 }
+
+type MeasureRequest struct {
+	DeviceID  string     `url:"device_id"`                 // Required. Weather station mac address
+	ModuleID  string     `url:"module_id,omitempty"`       // Module mac address
+	Scale     string     `url:"scale"`                     // Required. Timeframe between two measurements {30min, 1hour, 3hours, 1day, 1week, 1month}
+	Type      string     `url:"type"`                      // Required. Type of data to be returned, e.g. "temperature".
+	DateBegin *time.Time `url:"date_begin,omitempty,unix"` // Timestamp of the first measure to retrieve.  By default, it will retrieve the oldest data available.
+	DateEnd   *time.Time `url:"date_end,omitempty,unix"`   // Timestamp of the last measure to retrieve.  By default, it will retrieve the oldest data available.
+	Limit     *int       `url:"limit,omitempty"`           // Maximum number of measurements (default and max are 1024)
+	Optimize  *bool      `url:"optimize,omitempty"`        // Optimized format of the answer. Default is true.
+	RealTime  *bool      `url:"real_time,omitempty"`       // If scale different than max, timestamps are by default offset + scale/2. To get exact timestamps, use true. Default is false.
+}
+
+type MeasureResponse struct {
+	Body map[int][1]float32 `json:"body"` // Unptimized format of the answer. TODO: support the optimized format.
+
+	Status     string  `json:"status"`
+	TimeExec   float64 `json:"time_exec"`
+	TimeServer int     `json:"time_server"`
+}

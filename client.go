@@ -9,10 +9,11 @@ import (
 )
 
 const (
-	baseURL   = "https://api.netatmo.net/"
-	authURL   = baseURL + "oauth2/authorize"
-	tokenURL  = baseURL + "oauth2/token"
-	deviceURL = baseURL + "/api/getstationsdata"
+	baseURL    = "https://api.netatmo.net/"
+	authURL    = baseURL + "oauth2/authorize"
+	tokenURL   = baseURL + "oauth2/token"
+	deviceURL  = baseURL + "/api/getstationsdata"
+	measureURL = baseURL + "/api/getmeasure"
 )
 
 var (
